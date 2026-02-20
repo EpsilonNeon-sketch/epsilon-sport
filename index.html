@@ -1,0 +1,761 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Epsilon Sports - Track Your Fitness Journey</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="icon" href="./ep-sp-lg.png">
+    <script src="https://unpkg.com/lucide@latest"></script>
+    <style>
+        .orange-gradient {
+            background: linear-gradient(135deg, #ff6b35 0%, #f77737 100%);
+        }
+
+        .orange-hover:hover {
+            background: linear-gradient(135deg, #ff5722 0%, #ff6b35 100%);
+        }
+
+        .orange-text {
+            color: #ff6b35;
+        }
+
+        .orange-border {
+            border-color: #ff6b35;
+        }
+
+        .orange-bg {
+            background-color: #ff6b35;
+        }
+
+        .calendar-day {
+            min-height: 80px;
+        }
+
+        .fade-in {
+            animation: fadeIn 0.3s ease-in;
+        }
+
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+                transform: translateY(10px);
+            }
+
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .workout-card {
+            transition: all 0.3s ease;
+        }
+
+        .workout-card:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 10px 25px rgba(255, 107, 53, 0.2);
+        }
+    </style>
+</head>
+
+<body class="bg-gray-50">
+    <!-- Navigation -->
+    <nav class="orange-gradient shadow-lg sticky top-0 z-50">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex justify-between h-16">
+                <div class="flex items-center">
+                    <i data-lucide="activity" class="w-8 h-8 text-white mr-3"></i>
+                    <span class="text-white text-xl font-bold">Epsilon Sports</span>
+                </div>
+                <div class="flex items-center space-x-4">
+                    <button onclick="showView('dashboard')"
+                        class="nav-btn text-white hover:text-orange-100 px-3 py-2 rounded-md text-sm font-medium transition">
+                        <i data-lucide="layout-dashboard" class="w-5 h-5 inline mr-1"></i> Dashboard
+                    </button>
+                    <button onclick="showView('workouts')"
+                        class="nav-btn text-white hover:text-orange-100 px-3 py-2 rounded-md text-sm font-medium transition">
+                        <i data-lucide="dumbbell" class="w-5 h-5 inline mr-1"></i> Workouts
+                    </button>
+                    <button onclick="showView('exercises')"
+                        class="nav-btn text-white hover:text-orange-100 px-3 py-2 rounded-md text-sm font-medium transition">
+                        <i data-lucide="list" class="w-5 h-5 inline mr-1"></i> Exercises
+                    </button>
+                    <button onclick="showView('calendar')"
+                        class="nav-btn text-white hover:text-orange-100 px-3 py-2 rounded-md text-sm font-medium transition">
+                        <i data-lucide="calendar" class="w-5 h-5 inline mr-1"></i> Calendar
+                    </button>
+                    <button onclick="showView('profile')"
+                        class="nav-btn text-white hover:text-orange-100 px-3 py-2 rounded-md text-sm font-medium transition">
+                        <i data-lucide="user" class="w-5 h-5 inline mr-1"></i> Profile
+                    </button>
+                </div>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Main Content -->
+    <main class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
+        <!-- Dashboard View -->
+        <div id="dashboard-view" class="view">
+            <h1 class="text-3xl font-bold text-gray-800 mb-8">Welcome back, <span id="user-name">Athlete</span>!</h1>
+            <img src="./ep-sp-lg.png" height="100px" class="mx-auto mb-4" width="100px" style="border-radius: 50%;">
+            <!-- Stats Grid -->
+            <div class="grid grid-cols-1 md:grid-cols-4 gap-6 mb-8">
+                <div class="bg-white rounded-lg shadow p-6 workout-card">
+                    <div class="flex items-center justify-between">
+                        <div>
+                            <p class="text-gray-500 text-sm">Total Workouts</p>
+                            <p class="text-2xl font-bold orange-text" id="total-workouts">0</p>
+                        </div>
+                        <i data-lucide="target" class="w-10 h-10 orange-text opacity-50"></i>
+                    </div>
+                </div>
+                <div class="bg-white rounded-lg shadow p-6 workout-card">
+                    <div class="flex items-center justify-between">
+                        <div>
+                            <p class="text-gray-500 text-sm">This Week</p>
+                            <p class="text-2xl font-bold orange-text" id="week-workouts">0</p>
+                        </div>
+                        <i data-lucide="trending-up" class="w-10 h-10 orange-text opacity-50"></i>
+                    </div>
+                </div>
+                <div class="bg-white rounded-lg shadow p-6 workout-card">
+                    <div class="flex items-center justify-between">
+                        <div>
+                            <p class="text-gray-500 text-sm">Current Streak</p>
+                            <p class="text-2xl font-bold orange-text" id="streak">0 days</p>
+                        </div>
+                        <i data-lucide="flame" class="w-10 h-10 orange-text opacity-50"></i>
+                    </div>
+                </div>
+                <div class="bg-white rounded-lg shadow p-6 workout-card">
+                    <div class="flex items-center justify-between">
+                        <div>
+                            <p class="text-gray-500 text-sm">Total Volume</p>
+                            <p class="text-2xl font-bold orange-text" id="total-volume">0 kg</p>
+                        </div>
+                        <i data-lucide="bar-chart-3" class="w-10 h-10 orange-text opacity-50"></i>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Recent Workouts -->
+            <div class="bg-white rounded-lg shadow p-6">
+                <h2 class="text-xl font-bold text-gray-800 mb-4">Recent Workouts</h2>
+                <div id="recent-workouts" class="space-y-3">
+                    <p class="text-gray-500">No workouts yet. Start your first workout!</p>
+                </div>
+            </div>
+        </div>
+
+        <!-- Workouts View -->
+        <div id="workouts-view" class="view hidden">
+            <div class="flex justify-between items-center mb-8">
+                <h1 class="text-3xl font-bold text-gray-800">Workouts</h1>
+                <button onclick="openWorkoutModal()"
+                    class="orange-gradient text-white px-6 py-3 rounded-lg hover:opacity-90 transition flex items-center">
+                    <i data-lucide="plus" class="w-5 h-5 mr-2"></i> New Workout
+                </button>
+            </div>
+
+            <div id="workouts-list" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+                <div class="text-gray-500 col-span-full text-center py-12">
+                    <i data-lucide="dumbbell" class="w-16 h-16 mx-auto mb-4 opacity-50"></i>
+                    <p>No workouts recorded yet.</p>
+                    <p class="text-sm">Click "New Workout" to get started!</p>
+                </div>
+            </div>
+        </div>
+
+        <!-- Exercises View -->
+        <div id="exercises-view" class="view hidden">
+            <div class="flex justify-between items-center mb-8">
+                <h1 class="text-3xl font-bold text-gray-800">Exercise Library</h1>
+                <button onclick="openExerciseModal()"
+                    class="orange-gradient text-white px-6 py-3 rounded-lg hover:opacity-90 transition flex items-center">
+                    <i data-lucide="plus" class="w-5 h-5 mr-2"></i> Add Exercise
+                </button>
+            </div>
+
+            <div class="mb-6">
+                <input type="text" id="exercise-search" placeholder="Search exercises..."
+                    class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-orange-500"
+                    onkeyup="searchExercises()">
+            </div>
+
+            <div id="exercises-list" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
+                <!-- Default exercises will be loaded here -->
+            </div>
+        </div>
+
+        <!-- Calendar View -->
+        <div id="calendar-view" class="view hidden">
+            <h1 class="text-3xl font-bold text-gray-800 mb-8">Workout Calendar</h1>
+            <div class="bg-white rounded-lg shadow p-6">
+                <div class="flex justify-between items-center mb-4">
+                    <button onclick="changeMonth(-1)" class="p-2 hover:bg-gray-100 rounded">
+                        <i data-lucide="chevron-left" class="w-5 h-5"></i>
+                    </button>
+                    <h2 id="calendar-month" class="text-xl font-semibold"></h2>
+                    <button onclick="changeMonth(1)" class="p-2 hover:bg-gray-100 rounded">
+                        <i data-lucide="chevron-right" class="w-5 h-5"></i>
+                    </button>
+                </div>
+                <div class="grid grid-cols-7 gap-2">
+                    <div class="text-center font-semibold text-gray-600 py-2">Sun</div>
+                    <div class="text-center font-semibold text-gray-600 py-2">Mon</div>
+                    <div class="text-center font-semibold text-gray-600 py-2">Tue</div>
+                    <div class="text-center font-semibold text-gray-600 py-2">Wed</div>
+                    <div class="text-center font-semibold text-gray-600 py-2">Thu</div>
+                    <div class="text-center font-semibold text-gray-600 py-2">Fri</div>
+                    <div class="text-center font-semibold text-gray-600 py-2">Sat</div>
+                </div>
+                <div id="calendar-days" class="grid grid-cols-7 gap-2">
+                    <!-- Calendar days will be generated here -->
+                </div>
+            </div>
+        </div>
+
+        <!-- Profile View -->
+        <div id="profile-view" class="view hidden">
+            <h1 class="text-3xl font-bold text-gray-800 mb-8">Profile Settings</h1>
+            <div class="bg-white rounded-lg shadow p-6">
+                <form onsubmit="saveProfile(event)" class="space-y-6">
+                    <div>
+                        <label class="block text-sm font-medium text-gray-700 mb-2">Name</label>
+                        <input type="text" id="profile-name"
+                            class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-orange-500">
+                    </div>
+                    <div>
+                        <label class="block text-sm font-medium text-gray-700 mb-2">Age</label>
+                        <input type="number" id="profile-age"
+                            class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-orange-500">
+                    </div>
+                    <div>
+                        <label class="block text-sm font-medium text-gray-700 mb-2">Weight (kg)</label>
+                        <input type="number" id="profile-weight" step="0.1"
+                            class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-orange-500">
+                    </div>
+                    <div>
+                        <label class="block text-sm font-medium text-gray-700 mb-2">Height (cm)</label>
+                        <input type="number" id="profile-height"
+                            class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-orange-500">
+                    </div>
+                    <div>
+                        <label class="block text-sm font-medium text-gray-700 mb-2">Fitness Goal</label>
+                        <select id="profile-goal"
+                            class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-orange-500">
+                            <option value="lose-weight">Lose Weight</option>
+                            <option value="build-muscle">Build Muscle</option>
+                            <option value="endurance">Improve Endurance</option>
+                            <option value="strength">Increase Strength</option>
+                            <option value="general">General Fitness</option>
+                        </select>
+                    </div>
+                    <button type="submit"
+                        class="orange-gradient text-white px-6 py-3 rounded-lg hover:opacity-90 transition">
+                        Save Profile
+                    </button>
+                </form>
+            </div>
+        </div>
+    </main>
+
+    <!-- Workout Modal -->
+    <div id="workout-modal" class="fixed inset-0 bg-black bg-opacity-50 hidden flex items-center justify-center z-50">
+        <div class="bg-white rounded-lg p-6 w-full max-w-2xl max-h-[90vh] overflow-y-auto">
+            <div class="flex justify-between items-center mb-4">
+                <h2 class="text-2xl font-bold">New Workout</h2>
+                <button onclick="closeWorkoutModal()" class="text-gray-500 hover:text-gray-700">
+                    <i data-lucide="x" class="w-6 h-6"></i>
+                </button>
+            </div>
+            <form onsubmit="saveWorkout(event)">
+                <div class="mb-4">
+                    <label class="block text-sm font-medium text-gray-700 mb-2">Workout Name</label>
+                    <input type="text" id="workout-name" required
+                        class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-orange-500">
+                </div>
+                <div class="mb-4">
+                    <label class="block text-sm font-medium text-gray-700 mb-2">Date</label>
+                    <input type="date" id="workout-date" required
+                        class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-orange-500">
+                </div>
+                <div class="mb-4">
+                    <label class="block text-sm font-medium text-gray-700 mb-2">Duration (minutes)</label>
+                    <input type="number" id="workout-duration" required
+                        class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-orange-500">
+                </div>
+                <div class="mb-4">
+                    <label class="block text-sm font-medium text-gray-700 mb-2">Exercises</label>
+                    <div id="workout-exercises" class="space-y-3">
+                        <div class="workout-exercise-item">
+                            <select
+                                class="exercise-select w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-orange-500 mb-2">
+                                <option value="">Select exercise</option>
+                            </select>
+                            <div class="grid grid-cols-3 gap-2">
+                                <input type="number" placeholder="Sets"
+                                    class="sets-input px-3 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-orange-500">
+                                <input type="number" placeholder="Reps"
+                                    class="reps-input px-3 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-orange-500">
+                                <input type="number" placeholder="Weight (kg)"
+                                    class="weight-input px-3 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-orange-500">
+                            </div>
+                        </div>
+                    </div>
+                    <button type="button" onclick="addExerciseToWorkout()"
+                        class="mt-3 text-orange-600 hover:text-orange-700 text-sm font-medium">
+                        <i data-lucide="plus" class="w-4 h-4 inline"></i> Add Exercise
+                    </button>
+                </div>
+                <div class="mb-4">
+                    <label class="block text-sm font-medium text-gray-700 mb-2">Notes</label>
+                    <textarea id="workout-notes" rows="3"
+                        class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-orange-500"></textarea>
+                </div>
+                <button type="submit"
+                    class="orange-gradient text-white px-6 py-3 rounded-lg hover:opacity-90 transition w-full">
+                    Save Workout
+                </button>
+            </form>
+        </div>
+    </div>
+
+    <!-- Exercise Modal -->
+    <div id="exercise-modal" class="fixed inset-0 bg-black bg-opacity-50 hidden flex items-center justify-center z-50">
+        <div class="bg-white rounded-lg p-6 w-full max-w-md">
+            <div class="flex justify-between items-center mb-4">
+                <h2 class="text-2xl font-bold">Add Exercise</h2>
+                <button onclick="closeExerciseModal()" class="text-gray-500 hover:text-gray-700">
+                    <i data-lucide="x" class="w-6 h-6"></i>
+                </button>
+            </div>
+            <form onsubmit="saveExercise(event)">
+                <div class="mb-4">
+                    <label class="block text-sm font-medium text-gray-700 mb-2">Exercise Name</label>
+                    <input type="text" id="exercise-name" required
+                        class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-orange-500">
+                </div>
+                <div class="mb-4">
+                    <label class="block text-sm font-medium text-gray-700 mb-2">Category</label>
+                    <select id="exercise-category" required
+                        class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-orange-500">
+                        <option value="strength">Strength</option>
+                        <option value="cardio">Cardio</option>
+                        <option value="flexibility">Flexibility</option>
+                        <option value="sports">Sports</option>
+                        <option value="other">Other</option>
+                    </select>
+                </div>
+                <div class="mb-4">
+                    <label class="block text-sm font-medium text-gray-700 mb-2">Muscle Group</label>
+                    <select id="exercise-muscle" required
+                        class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-orange-500">
+                        <option value="chest">Chest</option>
+                        <option value="back">Back</option>
+                        <option value="shoulders">Shoulders</option>
+                        <option value="arms">Arms</option>
+                        <option value="legs">Legs</option>
+                        <option value="core">Core</option>
+                        <option value="full-body">Full Body</option>
+                    </select>
+                </div>
+                <button type="submit"
+                    class="orange-gradient text-white px-6 py-3 rounded-lg hover:opacity-90 transition w-full">
+                    Add Exercise
+                </button>
+            </form>
+        </div>
+    </div>
+
+    <script>
+        // Initialize data
+        let currentMonth = new Date();
+        let workouts = JSON.parse(localStorage.getItem('epsilon-workouts')) || [];
+        let exercises = JSON.parse(localStorage.getItem('epsilon-exercises')) || [];
+        let profile = JSON.parse(localStorage.getItem('epsilon-profile')) || { name: 'Athlete' };
+
+        // Initialize default exercises if none exist
+        if (exercises.length === 0) {
+            exercises = [
+                { id: 1, name: 'Bench Press', category: 'strength', muscle: 'chest' },
+                { id: 2, name: 'Squats', category: 'strength', muscle: 'legs' },
+                { id: 3, name: 'Deadlifts', category: 'strength', muscle: 'back' },
+                { id: 4, name: 'Pull-ups', category: 'strength', muscle: 'back' },
+                { id: 5, name: 'Shoulder Press', category: 'strength', muscle: 'shoulders' },
+                { id: 6, name: 'Bicep Curls', category: 'strength', muscle: 'arms' },
+                { id: 7, name: 'Running', category: 'cardio', muscle: 'legs' },
+                { id: 8, name: 'Cycling', category: 'cardio', muscle: 'legs' },
+                { id: 9, name: 'Plank', category: 'strength', muscle: 'core' }
+            ];
+            localStorage.setItem('epsilon-exercises', JSON.stringify(exercises));
+        }
+
+        // View management
+        function showView(viewName) {
+            document.querySelectorAll('.view').forEach(view => {
+                view.classList.add('hidden');
+            });
+            document.getElementById(`${viewName}-view`).classList.remove('hidden');
+
+            // Update view-specific content
+            if (viewName === 'dashboard') {
+                updateDashboard();
+            } else if (viewName === 'workouts') {
+                displayWorkouts();
+            } else if (viewName === 'exercises') {
+                displayExercises();
+            } else if (viewName === 'calendar') {
+                renderCalendar();
+            } else if (viewName === 'profile') {
+                loadProfile();
+            }
+
+            // Reinitialize Lucide icons
+            lucide.createIcons();
+        }
+
+        // Dashboard functions
+        function updateDashboard() {
+            document.getElementById('user-name').textContent = profile.name || 'Athlete';
+
+            // Calculate stats
+            const totalWorkouts = workouts.length;
+            const thisWeek = workouts.filter(w => {
+                const workoutDate = new Date(w.date);
+                const weekAgo = new Date();
+                weekAgo.setDate(weekAgo.getDate() - 7);
+                return workoutDate >= weekAgo;
+            }).length;
+
+            // Calculate streak
+            let streak = 0;
+            const sortedDates = workouts.map(w => new Date(w.date)).sort((a, b) => b - a);
+            if (sortedDates.length > 0) {
+                let currentDate = new Date();
+                currentDate.setHours(0, 0, 0, 0);
+
+                for (let date of sortedDates) {
+                    date.setHours(0, 0, 0, 0);
+                    const diffDays = Math.floor((currentDate - date) / (1000 * 60 * 60 * 24));
+
+                    if (diffDays === streak) {
+                        streak++;
+                    } else {
+                        break;
+                    }
+                }
+            }
+
+            // Calculate total volume
+            let totalVolume = 0;
+            workouts.forEach(workout => {
+                workout.exercises?.forEach(exercise => {
+                    totalVolume += (exercise.sets || 0) * (exercise.reps || 0) * (exercise.weight || 0);
+                });
+            });
+
+            // Update UI
+            document.getElementById('total-workouts').textContent = totalWorkouts;
+            document.getElementById('week-workouts').textContent = thisWeek;
+            document.getElementById('streak').textContent = `${streak} days`;
+            document.getElementById('total-volume').textContent = `${totalVolume} kg`;
+
+            // Display recent workouts
+            const recentWorkoutsDiv = document.getElementById('recent-workouts');
+            if (workouts.length > 0) {
+                const recent = workouts.slice(-5).reverse();
+                recentWorkoutsDiv.innerHTML = recent.map(workout => `
+                    <div class="flex justify-between items-center p-3 hover:bg-gray-50 rounded-lg transition">
+                        <div>
+                            <p class="font-semibold">${workout.name}</p>
+                            <p class="text-sm text-gray-500">${new Date(workout.date).toLocaleDateString()} • ${workout.duration} min</p>
+                        </div>
+                        <div class="text-right">
+                            <p class="text-sm orange-text font-medium">${workout.exercises?.length || 0} exercises</p>
+                        </div>
+                    </div>
+                `).join('');
+            } else {
+                recentWorkoutsDiv.innerHTML = '<p class="text-gray-500">No workouts yet. Start your first workout!</p>';
+            }
+        }
+
+        // Workout functions
+        function displayWorkouts() {
+            const workoutsList = document.getElementById('workouts-list');
+            if (workouts.length === 0) {
+                workoutsList.innerHTML = `
+                    <div class="text-gray-500 col-span-full text-center py-12">
+                        <i data-lucide="dumbbell" class="w-16 h-16 mx-auto mb-4 opacity-50"></i>
+                        <p>No workouts recorded yet.</p>
+                        <p class="text-sm">Click "New Workout" to get started!</p>
+                    </div>
+                `;
+            } else {
+                workoutsList.innerHTML = workouts.map(workout => `
+                    <div class="bg-white rounded-lg shadow p-6 workout-card">
+                        <div class="flex justify-between items-start mb-3">
+                            <h3 class="text-lg font-semibold">${workout.name}</h3>
+                            <button onclick="deleteWorkout(${workout.id})" class="text-red-500 hover:text-red-700">
+                                <i data-lucide="trash-2" class="w-4 h-4"></i>
+                            </button>
+                        </div>
+                        <p class="text-gray-600 text-sm mb-2">${new Date(workout.date).toLocaleDateString()}</p>
+                        <p class="text-gray-600 text-sm mb-3">Duration: ${workout.duration} minutes</p>
+                        <div class="space-y-1">
+                            ${workout.exercises?.map(ex => `
+                                <p class="text-sm text-gray-700">• ${ex.name}: ${ex.sets} × ${ex.reps} @ ${ex.weight}kg</p>
+                            `).join('') || ''}
+                        </div>
+                        ${workout.notes ? `<p class="text-sm text-gray-500 mt-3 italic">${workout.notes}</p>` : ''}
+                    </div>
+                `).join('');
+            }
+            lucide.createIcons();
+        }
+
+        function openWorkoutModal() {
+            document.getElementById('workout-modal').classList.remove('hidden');
+            document.getElementById('workout-date').value = new Date().toISOString().split('T')[0];
+            populateExerciseSelects();
+        }
+
+        function closeWorkoutModal() {
+            document.getElementById('workout-modal').classList.add('hidden');
+        }
+
+        function populateExerciseSelects() {
+            const selects = document.querySelectorAll('.exercise-select');
+            selects.forEach(select => {
+                select.innerHTML = '<option value="">Select exercise</option>' +
+                    exercises.map(ex => `<option value="${ex.id}">${ex.name}</option>`).join('');
+            });
+        }
+
+        function addExerciseToWorkout() {
+            const container = document.getElementById('workout-exercises');
+            const newExercise = document.createElement('div');
+            newExercise.className = 'workout-exercise-item fade-in';
+            newExercise.innerHTML = `
+                <select class="exercise-select w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-orange-500 mb-2">
+                    <option value="">Select exercise</option>
+                    ${exercises.map(ex => `<option value="${ex.id}">${ex.name}</option>`).join('')}
+                </select>
+                <div class="grid grid-cols-3 gap-2">
+                    <input type="number" placeholder="Sets" class="sets-input px-3 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-orange-500">
+                    <input type="number" placeholder="Reps" class="reps-input px-3 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-orange-500">
+                    <input type="number" placeholder="Weight (kg)" class="weight-input px-3 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-orange-500">
+                </div>
+            `;
+            container.appendChild(newExercise);
+        }
+
+        function saveWorkout(event) {
+            event.preventDefault();
+
+            const workoutExercises = [];
+            document.querySelectorAll('.workout-exercise-item').forEach(item => {
+                const exerciseId = item.querySelector('.exercise-select').value;
+                const sets = item.querySelector('.sets-input').value;
+                const reps = item.querySelector('.reps-input').value;
+                const weight = item.querySelector('.weight-input').value;
+
+                if (exerciseId && sets && reps) {
+                    const exercise = exercises.find(ex => ex.id == exerciseId);
+                    workoutExercises.push({
+                        id: exerciseId,
+                        name: exercise.name,
+                        sets: parseInt(sets),
+                        reps: parseInt(reps),
+                        weight: parseFloat(weight) || 0
+                    });
+                }
+            });
+
+            const workout = {
+                id: Date.now(),
+                name: document.getElementById('workout-name').value,
+                date: document.getElementById('workout-date').value,
+                duration: parseInt(document.getElementById('workout-duration').value),
+                exercises: workoutExercises,
+                notes: document.getElementById('workout-notes').value
+            };
+
+            workouts.push(workout);
+            localStorage.setItem('epsilon-workouts', JSON.stringify(workouts));
+
+            closeWorkoutModal();
+            showView('workouts');
+            updateDashboard();
+        }
+
+        function deleteWorkout(id) {
+            if (confirm('Are you sure you want to delete this workout?')) {
+                workouts = workouts.filter(w => w.id !== id);
+                localStorage.setItem('epsilon-workouts', JSON.stringify(workouts));
+                displayWorkouts();
+                updateDashboard();
+            }
+        }
+
+        // Exercise functions
+        function displayExercises() {
+            displayExercisesList();
+        }
+
+        function displayExercisesList(searchTerm = '') {
+            const exercisesList = document.getElementById('exercises-list');
+            const filtered = exercises.filter(ex =>
+                ex.name.toLowerCase().includes(searchTerm.toLowerCase())
+            );
+
+            exercisesList.innerHTML = filtered.map(exercise => `
+                <div class="bg-white rounded-lg shadow p-4 hover:shadow-md transition">
+                    <div class="flex justify-between items-start">
+                        <div>
+                            <h3 class="font-semibold">${exercise.name}</h3>
+                            <p class="text-sm text-gray-500">${exercise.category} • ${exercise.muscle}</p>
+                        </div>
+                        <button onclick="deleteExercise(${exercise.id})" class="text-red-500 hover:text-red-700">
+                            <i data-lucide="trash-2" class="w-4 h-4"></i>
+                        </button>
+                    </div>
+                </div>
+            `).join('');
+            lucide.createIcons();
+        }
+
+        function searchExercises() {
+            const searchTerm = document.getElementById('exercise-search').value;
+            displayExercisesList(searchTerm);
+        }
+
+        function openExerciseModal() {
+            document.getElementById('exercise-modal').classList.remove('hidden');
+        }
+
+        function closeExerciseModal() {
+            document.getElementById('exercise-modal').classList.add('hidden');
+        }
+
+        function saveExercise(event) {
+            event.preventDefault();
+
+            const exercise = {
+                id: Date.now(),
+                name: document.getElementById('exercise-name').value,
+                category: document.getElementById('exercise-category').value,
+                muscle: document.getElementById('exercise-muscle').value
+            };
+
+            exercises.push(exercise);
+            localStorage.setItem('epsilon-exercises', JSON.stringify(exercises));
+
+            closeExerciseModal();
+            displayExercises();
+        }
+
+        function deleteExercise(id) {
+            if (confirm('Are you sure you want to delete this exercise?')) {
+                exercises = exercises.filter(ex => ex.id !== id);
+                localStorage.setItem('epsilon-exercises', JSON.stringify(exercises));
+                displayExercises();
+            }
+        }
+
+        // Calendar functions
+        function renderCalendar() {
+            const year = currentMonth.getFullYear();
+            const month = currentMonth.getMonth();
+
+            document.getElementById('calendar-month').textContent =
+                new Date(year, month).toLocaleDateString('en-US', { month: 'long', year: 'numeric' });
+
+            const firstDay = new Date(year, month, 1).getDay();
+            const daysInMonth = new Date(year, month + 1, 0).getDate();
+
+            const calendarDays = document.getElementById('calendar-days');
+            calendarDays.innerHTML = '';
+
+            // Empty cells for days before month starts
+            for (let i = 0; i < firstDay; i++) {
+                calendarDays.innerHTML += '<div class="calendar-day"></div>';
+            }
+
+            // Days of the month
+            for (let day = 1; day <= daysInMonth; day++) {
+                const dateStr = `${year}-${String(month + 1).padStart(2, '0')}-${String(day).padStart(2, '0')}`;
+                const dayWorkouts = workouts.filter(w => w.date === dateStr);
+
+                calendarDays.innerHTML += `
+                    <div class="calendar-day border rounded-lg p-2 ${dayWorkouts.length > 0 ? 'bg-orange-50 border-orange-300' : 'border-gray-200'}">
+                        <div class="font-semibold">${day}</div>
+                        ${dayWorkouts.length > 0 ? `
+                            <div class="text-xs orange-text mt-1">
+                                ${dayWorkouts.length} workout${dayWorkouts.length > 1 ? 's' : ''}
+                            </div>
+                        ` : ''}
+                    </div>
+                `;
+            }
+        }
+
+        function changeMonth(direction) {
+            currentMonth.setMonth(currentMonth.getMonth() + direction);
+            renderCalendar();
+        }
+
+        // Profile functions
+        function loadProfile() {
+            document.getElementById('profile-name').value = profile.name || '';
+            document.getElementById('profile-age').value = profile.age || '';
+            document.getElementById('profile-weight').value = profile.weight || '';
+            document.getElementById('profile-height').value = profile.height || '';
+            document.getElementById('profile-goal').value = profile.goal || 'general';
+        }
+
+        function saveProfile(event) {
+            event.preventDefault();
+
+            profile = {
+                name: document.getElementById('profile-name').value,
+                age: parseInt(document.getElementById('profile-age').value),
+                weight: parseFloat(document.getElementById('profile-weight').value),
+                height: parseInt(document.getElementById('profile-height').value),
+                goal: document.getElementById('profile-goal').value
+            };
+
+            localStorage.setItem('epsilon-profile', JSON.stringify(profile));
+            updateDashboard();
+
+            // Show success message
+            const button = event.target.querySelector('button[type="submit"]');
+            const originalText = button.textContent;
+            button.textContent = 'Saved!';
+            button.classList.add('bg-green-500');
+            setTimeout(() => {
+                button.textContent = originalText;
+                button.classList.remove('bg-green-500');
+            }, 2000);
+        }
+
+        // Initialize the app
+        document.addEventListener('DOMContentLoaded', () => {
+            showView('dashboard');
+            lucide.createIcons();
+        });
+
+        // Close modals when clicking outside
+        window.onclick = function (event) {
+            if (event.target.classList.contains('fixed')) {
+                event.target.classList.add('hidden');
+            }
+        }
+    </script>
+</body>
+
+</html>
