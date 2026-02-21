@@ -1,0 +1,24 @@
+{
+    "name": "Epsilon Sports - Fitness Tracker",
+    "short_name": "epsi sport",
+    "description": "Track your fitness journey, workouts, and exercises with ease.",
+    "start_url": "/",
+    "display": "standalone",
+    "background_color": "#f9fafb",
+    "theme_color": "#ff6b35",
+    "orientation": "portrait",
+    "icons": [
+        {
+            "src": "./ep-sp-lg.png",
+            "sizes": "192x192",
+            "type": "image/png",
+            "purpose": "any maskable"
+        },
+        {
+            "src": "./ep-sp-lg.png",
+            "sizes": "512x512",
+            "type": "image/png",
+            "purpose": "any"
+        }
+    ]
+}
