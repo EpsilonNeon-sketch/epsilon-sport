@@ -1,0 +1,556 @@
+<!DOCTYPE html>
+<html lang="en" class="scroll-smooth">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Epsilon Sports | The Ultimate Fitness Tracking Platform</title>
+
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=Plus+Jakarta+Sans:wght@500;600;700;800&display=swap"
+        rel="stylesheet">
+
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+
+    <!-- Lucide Icons -->
+    <script src="https://unpkg.com/lucide@latest"></script>
+
+    <!-- Tailwind Configuration & Custom Styles -->
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    fontFamily: {
+                        sans: ['Inter', 'sans-serif'],
+                        display: ['Plus Jakarta Sans', 'sans-serif'],
+                    },
+                    colors: {
+                        brand: {
+                            50: '#fff3ed',
+                            100: '#ffe4d4',
+                            500: '#ff6b35',
+                            600: '#f77737',
+                            900: '#7a2b10',
+                        }
+                    },
+                    backgroundImage: {
+                        'gradient-brand': 'linear-gradient(135deg, #ff6b35 0%, #f77737 100%)',
+                    }
+                }
+            }
+        }
+    </script>
+    <style>
+        .clip-path-slant {
+            clip-path: polygon(0 0, 100% 0, 100% 85%, 0 100%);
+        }
+
+        .glass-card {
+            background: rgba(255, 255, 255, 0.9);
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(255, 255, 255, 0.2);
+        }
+    </style>
+</head>
+
+<body class="font-sans text-slate-600 bg-slate-50 antialiased selection:bg-brand-500 selection:text-white">
+
+    <!-- Navigation -->
+    <nav class="fixed w-full z-50 transition-all duration-300 glass-card border-b border-slate-200">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex justify-between items-center h-20">
+                <div class="flex items-center gap-2 cursor-pointer">
+                    <div class="bg-gradient-brand p-2 rounded-lg">
+                        <i data-lucide="activity" class="w-6 h-6 text-white"></i>
+                    </div>
+                    <span class="font-display text-2xl font-bold text-slate-900 tracking-tight">Epsilon<span
+                            class="text-brand-500">Sports</span></span>
+                </div>
+
+                <div class="hidden md:flex items-center space-x-8">
+                    <a href="#features"
+                        class="text-sm font-medium text-slate-600 hover:text-brand-500 transition-colors">Features</a>
+                    <a href="#how-it-works"
+                        class="text-sm font-medium text-slate-600 hover:text-brand-500 transition-colors">How it
+                        Works</a>
+
+                    <a href="#pricing"
+                        class="text-sm font-medium text-slate-600 hover:text-brand-500 transition-colors">Pricing</a>
+                </div>
+
+                <div class="hidden md:flex items-center space-x-4">
+                    <a href="#" class="text-sm font-medium text-slate-900 hover:text-brand-500 transition-colors">Log
+                        in</a>
+                    <a href="./site.html"
+                        class="bg-gradient-brand text-white px-5 py-2.5 rounded-full text-sm font-semibold hover:shadow-lg hover:shadow-brand-500/30 transition-all duration-300 transform hover:-translate-y-0.5">
+                        Start Free Trial
+                    </a>
+                </div>
+
+                <!-- Mobile menu button -->
+                <div class="md:hidden flex items-center">
+                    <button class="text-slate-600 hover:text-slate-900">
+                        <i data-lucide="menu" class="w-6 h-6"></i>
+                    </button>
+                </div>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <section class="relative pt-32 pb-20 lg:pt-48 lg:pb-32 overflow-hidden clip-path-slant bg-slate-900">
+        <!-- Background Image with Overlay -->
+        <div class="absolute inset-0 z-0">
+            <img src="https://images.unsplash.com/photo-1534438327276-14e5300c3a48?q=80&w=2070&auto=format&fit=crop"
+                alt="Athlete training" class="w-full h-full object-cover opacity-30 mix-blend-overlay">
+            <div class="absolute inset-0 bg-gradient-to-r from-slate-900 via-slate-900/95 to-slate-900/70"></div>
+        </div>
+
+        <div class="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="lg:grid lg:grid-cols-12 lg:gap-16 items-center">
+                <div class="lg:col-span-6 text-center lg:text-left">
+                    <div
+                        class="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-brand-500/10 border border-brand-500/20 text-brand-400 text-sm font-semibold mb-6">
+                        <span class="flex h-2 w-2 rounded-full bg-brand-500"></span>
+                        New: Advanced Analytics Dashboard
+                    </div>
+                    <h1 class="font-display text-4xl sm:text-5xl lg:text-6xl font-bold text-white leading-tight mb-6">
+                        Track Your Fitness Journey with <span
+                            class="text-transparent bg-clip-text bg-gradient-brand">Precision.</span>
+                    </h1>
+                    <p class="text-lg text-slate-300 mb-8 max-w-2xl mx-auto lg:mx-0 leading-relaxed">
+                        Epsilon Sports is the ultimate tracking platform for dedicated athletes. Log workouts, monitor
+                        your volume, maintain your streaks, and crush your goals.
+                    </p>
+                    <div class="flex flex-col sm:flex-row gap-4 justify-center lg:justify-start">
+                        <a href="#pricing"
+                            class="bg-gradient-brand text-white px-8 py-4 rounded-full text-base font-semibold hover:shadow-xl hover:shadow-brand-500/40 transition-all duration-300 flex items-center justify-center gap-2">
+                            Start Your Journey <i data-lucide="arrow-right" class="w-5 h-5"></i>
+                        </a>
+                        <a href="#features"
+                            class="bg-white/10 text-white border border-white/20 px-8 py-4 rounded-full text-base font-semibold hover:bg-white/20 transition-all duration-300 flex items-center justify-center gap-2 backdrop-blur-sm">
+                            <i data-lucide="play-circle" class="w-5 h-5"></i> See how it works
+                        </a>
+                    </div>
+                    <div class="mt-10 flex items-center justify-center lg:justify-start gap-4 text-sm text-slate-400">
+                        <div class="flex -space-x-2">
+                            <img class="w-8 h-8 rounded-full border-2 border-slate-900"
+                                src="https://images.unsplash.com/photo-1534528741775-53994a69daeb?w=100&h=100&fit=crop"
+                                alt="User">
+                            <img class="w-8 h-8 rounded-full border-2 border-slate-900"
+                                src="https://images.unsplash.com/photo-1506794778202-cad84cf45f1d?w=100&h=100&fit=crop"
+                                alt="User">
+                            <img class="w-8 h-8 rounded-full border-2 border-slate-900"
+                                src="https://images.unsplash.com/photo-1494790108377-be9c29b29330?w=100&h=100&fit=crop"
+                                alt="User">
+                        </div>
+                        <p>Join <span class="text-white font-semibold">10,000+</span> athletes worldwide</p>
+                    </div>
+                </div>
+
+                <!-- Floating App Mockup Graphic -->
+                <div class="lg:col-span-6 mt-16 lg:mt-0 relative hidden md:block">
+                    <div
+                        class="relative rounded-2xl bg-white shadow-2xl overflow-hidden border border-slate-200 transform rotate-2 hover:rotate-0 transition-transform duration-500">
+                        <!-- Mockup Header -->
+                        <div class="bg-slate-50 border-b border-slate-100 p-4 flex items-center justify-between">
+                            <div class="flex items-center gap-3">
+                                <img src="https://images.unsplash.com/photo-1534528741775-53994a69daeb?w=100&h=100&fit=crop"
+                                    class="w-10 h-10 rounded-full" alt="Profile">
+                                <div>
+                                    <p class="text-xs text-slate-500 font-medium">Welcome back,</p>
+                                    <p class="text-sm font-bold text-slate-900">Sarah Athlete</p>
+                                </div>
+                            </div>
+                            <div
+                                class="bg-brand-50 text-brand-600 px-3 py-1 rounded-full text-xs font-bold flex items-center gap-1">
+                                <i data-lucide="flame" class="w-3 h-3"></i> 12 Day Streak
+                            </div>
+                        </div>
+                        <!-- Mockup Body -->
+                        <div class="p-6 bg-slate-50">
+                            <div class="grid grid-cols-2 gap-4 mb-6">
+                                <div class="bg-white p-4 rounded-xl shadow-sm border border-slate-100">
+                                    <i data-lucide="target" class="w-6 h-6 text-brand-500 mb-2"></i>
+                                    <p class="text-xs text-slate-500 mb-1">Total Workouts</p>
+                                    <p class="text-xl font-bold text-slate-900">142</p>
+                                </div>
+                                <div class="bg-white p-4 rounded-xl shadow-sm border border-slate-100">
+                                    <i data-lucide="bar-chart-3" class="w-6 h-6 text-brand-500 mb-2"></i>
+                                    <p class="text-xs text-slate-500 mb-1">Volume This Week</p>
+                                    <p class="text-xl font-bold text-slate-900">12,450 kg</p>
+                                </div>
+                            </div>
+                            <div class="bg-white p-4 rounded-xl shadow-sm border border-slate-100">
+                                <h4 class="text-sm font-bold text-slate-900 mb-3">Recent Activity</h4>
+                                <div class="space-y-3">
+                                    <div class="flex justify-between items-center">
+                                        <div class="flex items-center gap-3">
+                                            <div class="bg-brand-100 p-2 rounded-lg text-brand-600">
+                                                <i data-lucide="dumbbell" class="w-4 h-4"></i>
+                                            </div>
+                                            <div>
+                                                <p class="text-sm font-semibold text-slate-900">Heavy Legs Day</p>
+                                                <p class="text-xs text-slate-500">Today • 65 min</p>
+                                            </div>
+                                        </div>
+                                        <span class="text-xs font-bold text-slate-900">6 Exercises</span>
+                                    </div>
+                                    <div class="flex justify-between items-center">
+                                        <div class="flex items-center gap-3">
+                                            <div class="bg-blue-100 p-2 rounded-lg text-blue-600">
+                                                <i data-lucide="activity" class="w-4 h-4"></i>
+                                            </div>
+                                            <div>
+                                                <p class="text-sm font-semibold text-slate-900">Morning 5K Run</p>
+                                                <p class="text-xs text-slate-500">Yesterday • 28 min</p>
+                                            </div>
+                                        </div>
+                                        <span class="text-xs font-bold text-slate-900">Cardio</span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Decorative Elements -->
+                    <div
+                        class="absolute -top-6 -right-6 w-24 h-24 bg-brand-500 rounded-full mix-blend-multiply filter blur-2xl opacity-50 animate-pulse">
+                    </div>
+                    <div class="absolute -bottom-8 -left-8 w-32 h-32 bg-blue-500 rounded-full mix-blend-multiply filter blur-2xl opacity-50 animate-pulse"
+                        style="animation-delay: 2s;"></div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Features Grid -->
+    <section id="features" class="py-24 bg-slate-50">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="text-center max-w-3xl mx-auto mb-16">
+                <h2 class="text-brand-500 font-semibold tracking-wide uppercase text-sm mb-3">Everything you need</h2>
+                <h3 class="font-display text-3xl md:text-4xl font-bold text-slate-900 mb-4">Powerful features to drive
+                    your performance</h3>
+                <p class="text-lg text-slate-600">Stop guessing and start tracking. Epsilon Sports provides all the
+                    tools you need to visualize your progress and stay motivated.</p>
+            </div>
+
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
+                <!-- Feature 1 -->
+                <div
+                    class="bg-white rounded-2xl p-8 shadow-sm border border-slate-100 hover:shadow-xl hover:-translate-y-1 transition-all duration-300 group">
+                    <div
+                        class="w-14 h-14 rounded-xl bg-brand-50 text-brand-500 flex items-center justify-center mb-6 group-hover:bg-brand-500 group-hover:text-white transition-colors duration-300">
+                        <i data-lucide="layout-dashboard" class="w-7 h-7"></i>
+                    </div>
+                    <h4 class="font-display text-xl font-bold text-slate-900 mb-3">Smart Dashboard</h4>
+                    <p class="text-slate-600 text-sm leading-relaxed">Get a bird's-eye view of your fitness journey.
+                        Track total workouts, weekly volume, and current streaks at a glance.</p>
+                </div>
+
+                <!-- Feature 2 -->
+                <div
+                    class="bg-white rounded-2xl p-8 shadow-sm border border-slate-100 hover:shadow-xl hover:-translate-y-1 transition-all duration-300 group">
+                    <div
+                        class="w-14 h-14 rounded-xl bg-brand-50 text-brand-500 flex items-center justify-center mb-6 group-hover:bg-brand-500 group-hover:text-white transition-colors duration-300">
+                        <i data-lucide="dumbbell" class="w-7 h-7"></i>
+                    </div>
+                    <h4 class="font-display text-xl font-bold text-slate-900 mb-3">Custom Workouts</h4>
+                    <p class="text-slate-600 text-sm leading-relaxed">Build and log complex workouts effortlessly.
+                        Record sets, reps, weight, and add personal notes to every session.</p>
+                </div>
+
+                <!-- Feature 3 -->
+                <div
+                    class="bg-white rounded-2xl p-8 shadow-sm border border-slate-100 hover:shadow-xl hover:-translate-y-1 transition-all duration-300 group">
+                    <div
+                        class="w-14 h-14 rounded-xl bg-brand-50 text-brand-500 flex items-center justify-center mb-6 group-hover:bg-brand-500 group-hover:text-white transition-colors duration-300">
+                        <i data-lucide="list" class="w-7 h-7"></i>
+                    </div>
+                    <h4 class="font-display text-xl font-bold text-slate-900 mb-3">Exercise Library</h4>
+                    <p class="text-slate-600 text-sm leading-relaxed">Access a comprehensive library of exercises
+                        categorized by muscle group, or add your own custom movements.</p>
+                </div>
+
+                <!-- Feature 4 -->
+                <div
+                    class="bg-white rounded-2xl p-8 shadow-sm border border-slate-100 hover:shadow-xl hover:-translate-y-1 transition-all duration-300 group">
+                    <div
+                        class="w-14 h-14 rounded-xl bg-brand-50 text-brand-500 flex items-center justify-center mb-6 group-hover:bg-brand-500 group-hover:text-white transition-colors duration-300">
+                        <i data-lucide="calendar" class="w-7 h-7"></i>
+                    </div>
+                    <h4 class="font-display text-xl font-bold text-slate-900 mb-3">Visual Calendar</h4>
+                    <p class="text-slate-600 text-sm leading-relaxed">Stay accountable with a visual workout calendar.
+                        See your consistency over the month and plan future sessions.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Deep Dive Sections -->
+    <section id="how-it-works" class="py-24 bg-white overflow-hidden">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+
+            <!-- Row 1 -->
+            <div class="lg:grid lg:grid-cols-2 lg:gap-16 items-center mb-24">
+                <div class="mb-12 lg:mb-0 relative">
+                    <div
+                        class="absolute inset-0 bg-gradient-to-tr from-brand-100 to-transparent rounded-3xl transform -rotate-3 scale-105 -z-10">
+                    </div>
+                    <img src="https://images.unsplash.com/photo-1571019614242-c5c5dee9f50b?q=80&w=2070&auto=format&fit=crop"
+                        alt="Logging workout" class="rounded-3xl shadow-2xl object-cover h-[500px] w-full">
+
+                    <!-- Floating Stat Card -->
+                    <div class="absolute -bottom-6 -right-6 bg-white p-5 rounded-2xl shadow-xl border border-slate-100 hidden md:block animate-bounce"
+                        style="animation-duration: 3s;">
+                        <div class="flex items-center gap-4">
+                            <div class="bg-green-100 p-3 rounded-full text-green-600">
+                                <i data-lucide="trending-up" class="w-6 h-6"></i>
+                            </div>
+                            <div>
+                                <p class="text-xs text-slate-500 font-medium">New Personal Record</p>
+                                <p class="text-lg font-bold text-slate-900">Deadlift 180kg</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div>
+                    <div
+                        class="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-slate-100 text-slate-600 text-sm font-semibold mb-6">
+                        <i data-lucide="zap" class="w-4 h-4 text-brand-500"></i> Seamless Logging
+                    </div>
+                    <h3 class="font-display text-3xl md:text-4xl font-bold text-slate-900 mb-6">Log workouts in seconds,
+                        not minutes.</h3>
+                    <p class="text-lg text-slate-600 mb-8 leading-relaxed">
+                        Our intuitive interface lets you build routines on the fly. Select from our extensive exercise
+                        library or create custom ones. Input sets, reps, and weights quickly so you can focus on the
+                        lift, not your phone.
+                    </p>
+                    <ul class="space-y-4 mb-8">
+                        <li class="flex items-start gap-3">
+                            <i data-lucide="check-circle-2" class="w-6 h-6 text-brand-500 flex-shrink-0"></i>
+                            <span class="text-slate-700">Quick-add exercises from categories (Strength, Cardio,
+                                Core)</span>
+                        </li>
+                        <li class="flex items-start gap-3">
+                            <i data-lucide="check-circle-2" class="w-6 h-6 text-brand-500 flex-shrink-0"></i>
+                            <span class="text-slate-700">Auto-calculate total volume per session</span>
+                        </li>
+                        <li class="flex items-start gap-3">
+                            <i data-lucide="check-circle-2" class="w-6 h-6 text-brand-500 flex-shrink-0"></i>
+                            <span class="text-slate-700">Add detailed notes for form cues or how you felt</span>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+
+            <!-- Row 2 -->
+            <div class="lg:grid lg:grid-cols-2 lg:gap-16 items-center flex flex-col-reverse lg:flex-row">
+                <div>
+                    <div
+                        class="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-slate-100 text-slate-600 text-sm font-semibold mb-6">
+                        <i data-lucide="bar-chart" class="w-4 h-4 text-brand-500"></i> Actionable Insights
+                    </div>
+                    <h3 class="font-display text-3xl md:text-4xl font-bold text-slate-900 mb-6">Your progress,
+                        visualized.</h3>
+                    <p class="text-lg text-slate-600 mb-8 leading-relaxed">
+                        Data is useless without context. The Epsilon dashboard transforms your raw workout data into
+                        motivating insights. Watch your weekly volume grow, maintain your workout streaks, and see your
+                        consistency map on the calendar.
+                    </p>
+                    <a href="#pricing"
+                        class="inline-flex items-center gap-2 text-brand-600 font-semibold hover:text-brand-700 transition-colors">
+                        Explore Pro Analytics <i data-lucide="arrow-right" class="w-4 h-4"></i>
+                    </a>
+                </div>
+                <div class="mb-12 lg:mb-0 relative w-full">
+                    <div
+                        class="absolute inset-0 bg-gradient-to-bl from-blue-100 to-transparent rounded-3xl transform rotate-3 scale-105 -z-10">
+                    </div>
+                    <img src="https://images.unsplash.com/photo-1552674605-15c37048152c?q=80&w=2076&auto=format&fit=crop"
+                        alt="Analyzing data" class="rounded-3xl shadow-2xl object-cover h-[500px] w-full">
+                </div>
+            </div>
+
+        </div>
+    </section>
+
+
+    <!-- Pricing Section -->
+    <section id="pricing" class="py-24 bg-slate-50">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="text-center max-w-3xl mx-auto mb-16">
+                <h2 class="text-brand-500 font-semibold tracking-wide uppercase text-sm mb-3">Simple Pricing</h2>
+                <h3 class="font-display text-3xl md:text-4xl font-bold text-slate-900 mb-4">Choose your training tier
+                </h3>
+                <p class="text-lg text-slate-600">Start for free, upgrade when you need more power.</p>
+            </div>
+
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-8 max-w-4xl mx-auto">
+                <!-- Basic Plan -->
+                <div class="bg-white p-8 rounded-3xl shadow-sm border border-slate-200">
+                    <h4 class="font-display text-2xl font-bold text-slate-900 mb-2">Rookie</h4>
+                    <p class="text-slate-500 mb-6">Perfect for getting started.</p>
+                    <div class="mb-8">
+                        <span class="text-4xl font-extrabold text-slate-900">$0</span>
+                        <span class="text-slate-500">/forever</span>
+                    </div>
+                    <ul class="space-y-4 mb-8">
+                        <li class="flex items-center gap-3 text-slate-700">
+                            <i data-lucide="check" class="w-5 h-5 text-brand-500"></i> Log up to 12 workouts/month
+                        </li>
+                        <li class="flex items-center gap-3 text-slate-700">
+                            <i data-lucide="check" class="w-5 h-5 text-brand-500"></i> Basic exercise library
+                        </li>
+                        <li class="flex items-center gap-3 text-slate-700">
+                            <i data-lucide="check" class="w-5 h-5 text-brand-500"></i> Workout calendar
+                        </li>
+                        <li class="flex items-center gap-3 text-slate-400">
+                            <i data-lucide="x" class="w-5 h-5"></i> Advanced volume analytics
+                        </li>
+                    </ul>
+                    <a href="./site.html">
+                        <button
+                            class="w-full py-3 px-6 rounded-xl border-2 border-slate-200 text-slate-700 font-bold hover:border-brand-500 hover:text-brand-500 transition-colors">
+                            Get Started Free
+                        </button>
+                    </a>
+                </div>
+
+                <!-- Pro Plan -->
+                <div
+                    class="bg-slate-900 p-8 rounded-3xl shadow-2xl border border-slate-800 relative transform md:-translate-y-4">
+                    <div
+                        class="absolute top-0 left-1/2 transform -translate-x-1/2 -translate-y-1/2 bg-gradient-brand text-white px-4 py-1 rounded-full text-sm font-bold shadow-lg">
+                        Most Popular
+                    </div>
+                    <h4 class="font-display text-2xl font-bold text-white mb-2">Athlete Pro</h4>
+                    <p class="text-slate-400 mb-6">For those serious about gains.</p>
+                    <div class="mb-8">
+                        <span class="text-4xl font-extrabold text-white">Free(if you have an epsilon account)</span>
+                        <span class="text-slate-400">/month</span>
+                    </div>
+                    <ul class="space-y-4 mb-8">
+                        <li class="flex items-center gap-3 text-slate-300">
+                            <i data-lucide="check" class="w-5 h-5 text-brand-500"></i> Unlimited workouts
+                        </li>
+                        <li class="flex items-center gap-3 text-slate-300">
+                            <i data-lucide="check" class="w-5 h-5 text-brand-500"></i> Add custom exercises
+                        </li>
+                        <li class="flex items-center gap-3 text-slate-300">
+                            <i data-lucide="check" class="w-5 h-5 text-brand-500"></i> Advanced volume & streak
+                            analytics
+                        </li>
+                        <li class="flex items-center gap-3 text-slate-300">
+                            <i data-lucide="check" class="w-5 h-5 text-brand-500"></i> Goal tracking & body metrics
+                        </li>
+                    </ul>
+                    <a href="./site.html">
+                        <button
+                            class="w-full py-3 px-6 rounded-xl bg-gradient-brand text-white font-bold hover:shadow-lg hover:shadow-brand-500/30 transition-all transform hover:-translate-y-0.5">
+                            Start 14-Day Free Trial
+                        </button>
+                    </a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- CTA Section -->
+    <section class="py-20 relative overflow-hidden">
+        <div class="absolute inset-0 bg-gradient-brand"></div>
+        <!-- Decorative bg elements -->
+        <div
+            class="absolute top-0 right-0 w-64 h-64 bg-white opacity-10 rounded-full mix-blend-overlay filter blur-3xl transform translate-x-1/2 -translate-y-1/2">
+        </div>
+        <div
+            class="absolute bottom-0 left-0 w-64 h-64 bg-black opacity-10 rounded-full mix-blend-overlay filter blur-3xl transform -translate-x-1/2 translate-y-1/2">
+        </div>
+
+        <div class="relative z-10 max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
+            <h2 class="font-display text-3xl md:text-5xl font-bold text-white mb-6">Ready to transform your training?
+            </h2>
+            <p class="text-brand-50 text-lg mb-10 max-w-2xl mx-auto">Join thousands of athletes who have ditched the
+                notebook and optimized their progress with Epsilon Sports.</p>
+            <a href="./site.html">
+                <button
+                    class="bg-white text-brand-600 px-8 py-4 rounded-full text-lg font-bold hover:shadow-xl hover:scale-105 transition-all duration-300">
+                    Create Your Free Account
+                </button>
+            </a>
+            <p class="mt-4 text-brand-100 text-sm">No credit card required for Rookie plan.</p>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="bg-slate-950 text-slate-400 py-12 border-t border-slate-900">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="grid grid-cols-1 md:grid-cols-4 gap-8 mb-8">
+                <div class="col-span-1 md:col-span-2">
+                    <div class="flex items-center gap-2 mb-4">
+                        <i data-lucide="activity" class="w-6 h-6 text-brand-500"></i>
+                        <span class="font-display text-xl font-bold text-white tracking-tight">Epsilon<span
+                                class="text-brand-500">Sports</span></span>
+                    </div>
+                    <p class="text-sm max-w-sm mb-6">The ultimate platform to track your fitness journey, analyze your
+                        volume, and crush your goals.</p>
+                    <div class="flex space-x-4">
+                        <a href="#" class="text-slate-400 hover:text-white transition-colors"><i data-lucide="twitter"
+                                class="w-5 h-5"></i></a>
+                        <a href="#" class="text-slate-400 hover:text-white transition-colors"><i data-lucide="instagram"
+                                class="w-5 h-5"></i></a>
+                        <a href="#" class="text-slate-400 hover:text-white transition-colors"><i data-lucide="youtube"
+                                class="w-5 h-5"></i></a>
+                    </div>
+                </div>
+
+                <div>
+                    <h4 class="text-white font-semibold mb-4">Product</h4>
+                    <ul class="space-y-2 text-sm">
+                        <li><a href="#features" class="hover:text-brand-500 transition-colors">Features</a></li>
+                        <li><a href="#pricing" class="hover:text-brand-500 transition-colors">Pricing</a></li>
+                        <li><a href="#" class="hover:text-brand-500 transition-colors">Exercise Library</a></li>
+                        <li><a href="#" class="hover:text-brand-500 transition-colors">Changelog</a></li>
+                    </ul>
+                </div>
+
+                <div>
+                    <h4 class="text-white font-semibold mb-4">Company</h4>
+                    <ul class="space-y-2 text-sm">
+                        <li><a href="#" class="hover:text-brand-500 transition-colors">About Us</a></li>
+                        <li><a href="#" class="hover:text-brand-500 transition-colors">Contact</a></li>
+                        <li><a href="#" class="hover:text-brand-500 transition-colors">Privacy Policy</a></li>
+                        <li><a href="#" class="hover:text-brand-500 transition-colors">Terms of Service</a></li>
+                    </ul>
+                </div>
+            </div>
+            <div class="pt-8 border-t border-slate-800 text-sm flex flex-col md:flex-row justify-between items-center">
+                <p>&copy; 2026 Epsilon Sports. All rights reserved.</p>
+                <p class="mt-2 md:mt-0 flex items-center gap-1">Built for athletes, by athletes. <i data-lucide="heart"
+                        class="w-4 h-4 text-brand-500"></i></p>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Initialize Lucide Icons -->
+    <script>
+        lucide.createIcons();
+
+        // Simple Navbar effect on scroll
+        window.addEventListener('scroll', () => {
+            const nav = document.querySelector('nav');
+            if (window.scrollY > 10) {
+                nav.classList.add('shadow-md');
+                nav.classList.replace('py-4', 'py-0'); // Slight shrink effect if needed
+            } else {
+                nav.classList.remove('shadow-md');
+            }
+        });
+    </script>
+</body>
+
+</html>
